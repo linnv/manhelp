@@ -1,0 +1,6 @@
+./main
+*.swp
+*.swo
+.DS_Store
+tags
+.tags
