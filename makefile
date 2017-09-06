@@ -8,14 +8,9 @@ endif
 
 GO:=go
 GOBUILD   := GOPATH=$(GOPATH) $(GO) build
-	# why don't need full package path, e.g. $prejct/packagename
-	# LDFLAGS += -X "version_demo.main.Version=$(shell git rev-parse HEAD)"
-	# LDFLAGS += -X "version_demo.main.BuildTime=$(shell date -u '+%Y-%m-%d %I:%M:%S')"
-	# LDFLAGS += -X "version_demo.main.Branch=$(shell git rev-parse --abbrev-ref HEAD)"
-
-	LDFLAGS += -X "main.Version=$(shell git rev-parse HEAD)"
-	LDFLAGS += -X "main.BuildTime=$(shell date -u '+%Y-%m-%d %I:%M:%S')"
-	LDFLAGS += -X "main.Branch=$(shell git rev-parse --abbrev-ref HEAD)"
+	LDFLAGS += -X "version_demo/internal/util.Version=$(shell git rev-parse HEAD)"
+	LDFLAGS += -X "version_demo/internal/util.BuildTime=$(shell date -u '+%Y-%m-%d %I:%M:%S')"
+	LDFLAGS += -X "version_demo/internal/util.Branch=$(shell git rev-parse --abbrev-ref HEAD)"
 all:
 	$(GOBUILD) -ldflags '$(LDFLAGS)' -o version main.go
 clean:
