@@ -73,12 +73,17 @@ func InitManHelp() {
 
 	args := flag.Args()
 	manHelpListLen := len(manHelpList)
+	helped := false
 	for _, v := range args {
 		upperV := strings.ToUpper(v)
 		for i := 0; i < manHelpListLen; i++ {
 			if ok, f := manHelpList[i].Match(upperV); ok {
+				helped = true
 				f()
 			}
 		}
+	}
+	if helped {
+		os.Exit(0)
 	}
 }
