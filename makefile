@@ -1,17 +1,23 @@
-### Makefile for version
+CURDIR := $(shell pwd)
 
-GOPATH ?= $(shell go env GOPATH)
+GO        := go
+GOBUILD   := GOPATH=$(GOPATH) CGO_ENABLED=0 $(GO) build $(BUILD_FLAG)
+GOTEST    := GOPATH=$(GOPATH) CGO_ENABLED=1 $(GO) test -p 3
 
-ifeq "$(GOPATH)" ""
-	$(error Please set the environment variable GOPATH before running `make`)
-endif
 
-GO:=go
-GOBUILD   := GOPATH=$(GOPATH) $(GO) build
-	LDFLAGS += -X "version_demo/internal/util.Version=$(shell git rev-parse HEAD)"
-	LDFLAGS += -X "version_demo/internal/util.BuildTime=$(shell date -u '+%Y-%m-%d %I:%M:%S')"
-	LDFLAGS += -X "version_demo/internal/util.Branch=$(shell git rev-parse --abbrev-ref HEAD)"
-all:
-	$(GOBUILD) -ldflags '$(LDFLAGS)' -o version main.go
-clean:
-	rm version
+LDFLAGS += -X "manhelp.Version=$(shell git describe --tags --dirty)"
+LDFLAGS += -X "manhelp.BuildTime=$(shell date -u '+%Y-%m-%d %I:%M:%S')"
+LDFLAGS += -X "manhelp.Branch=$(shell git rev-parse --abbrev-ref HEAD)"
+LDFLAGS += -X "manhelp.GitHash=$(shell git rev-parse HEAD)"
+
+all: build
+
+BUILDDIR=$(CURDIR)/example
+build: 
+	@mkdir -p $(BUILDDIR)
+	$(GOBUILD) -ldflags '$(LDFLAGS)' -o $(BUILDDIR)/main $(BUILDDIR)/main.go
+	$(GOBUILD) -ldflags '$(LDFLAGS)' -o $(BUILDDIR)/readline $(BUILDDIR)/readline.go
+
+clean: 
+	@rm $(BUILDDIR)/{main,readline}
+
