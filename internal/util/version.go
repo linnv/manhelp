@@ -72,6 +72,22 @@ func InitManHelp() {
 	manHelpList = append(manHelpList, hi)
 
 	args := flag.Args()
+	help := [...]string{"H", "HELP"}
+	if len(args) < 1 {
+		return
+	}
+
+	upperFirstArg := strings.ToUpper(strings.TrimSpace(args[0]))
+	for i := 0; i < len(help); i++ {
+		if upperFirstArg == help[i] {
+			goto listHelp
+		}
+	}
+	if upperFirstArg[0] != '-' {
+		goto listHelp
+	}
+	return
+listHelp:
 	manHelpListLen := len(manHelpList)
 	helped := false
 	for _, v := range args {
