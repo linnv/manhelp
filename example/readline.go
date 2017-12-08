@@ -2,10 +2,10 @@ package main
 
 import (
 	"io"
-	"manhelp"
 	"strings"
 
 	"github.com/chzyer/readline"
+	"github.com/linnv/manhelp"
 )
 
 func usage(w io.Writer) {

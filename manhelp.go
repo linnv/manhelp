@@ -13,8 +13,6 @@ var (
 	GitHash   = "None"
 )
 
-// go build -ldflags "-X '$projectName/internal/util.Version=`git rev-parse HEAD`' -X '$projectName/internal/util.BuildTime=`date  '+%Y-%m-%d_%H:%M:%S'`' " util.go
-
 type ManHelper interface {
 	//Match() find the help item and return its exection if found
 	Match(string) (bool, func())

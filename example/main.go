@@ -4,7 +4,7 @@ import (
 	"flag"
 	"os"
 
-	"manhelp"
+	"github.com/linnv/manhelp"
 )
 
 func main() {
