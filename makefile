@@ -15,9 +15,9 @@ all: build
 BUILDDIR=$(CURDIR)/example
 build: 
 	@mkdir -p $(BUILDDIR)
-	$(GOBUILD) -ldflags '$(LDFLAGS)' -o $(BUILDDIR)/main $(BUILDDIR)/main.go
-	$(GOBUILD) -ldflags '$(LDFLAGS)' -o $(BUILDDIR)/readline $(BUILDDIR)/readline.go
+	$(GOBUILD) -ldflags '$(LDFLAGS)' -o $(BUILDDIR)/example_main $(BUILDDIR)/main/main.go
+	$(GOBUILD) -ldflags '$(LDFLAGS)' -o $(BUILDDIR)/example_readline $(BUILDDIR)/readline/readline.go
 
 clean: 
-	@rm $(BUILDDIR)/{main,readline}
+	@rm $(BUILDDIR)/example_*
 
