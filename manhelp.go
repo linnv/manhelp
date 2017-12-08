@@ -120,6 +120,17 @@ func InitManHelp() {
 		os.Stdout.Write([]byte("Git Hash: " + GitHash + "\n"))
 	}
 	AddManHelper(hi)
+
+	hi.Alias = []string{"bi"}
+	hi.FullName = []string{"buildinfo"}
+	hi.Description = "show building information"
+	hi.ExecuteFunc = func() {
+		os.Stdout.Write([]byte("Version: " + Version + "\n" +
+			"BuildTime: " + BuildTime + "\n" +
+			"Branch: " + Branch + "\n" +
+			"Git Hash: " + GitHash + "\n"))
+	}
+	AddManHelper(hi)
 }
 
 func showManHelp() {
