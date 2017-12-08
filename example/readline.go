@@ -25,6 +25,8 @@ func filterInput(r rune) (rune, bool) {
 var completer *readline.PrefixCompleter
 
 func main() {
+	//basic help items associated the Makefile
+	manhelp.InitManHelp()
 	pcs := make([]readline.PrefixCompleterInterface, 0, 2)
 	for _, m := range manhelp.ManHelpList {
 		for _, key := range m.Keys() {
@@ -57,7 +59,6 @@ func main() {
 		panic(err)
 	}
 	defer l.Close()
-	manhelp.InitManHelp()
 	for {
 		line, err := l.Readline()
 		if err == readline.ErrInterrupt {
@@ -91,6 +92,7 @@ func main() {
 			goto exit
 		case line == "":
 		default:
+			//let manhelp handler one line
 			manhelp.Readline(line)
 		}
 	}
