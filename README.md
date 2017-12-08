@@ -8,7 +8,7 @@ A help information provider
 ## Getting Started
 Make sure you have [Go](http://golang.org/doc/install) installed
 ```
-go get -u github.com/linnv/manhelp
+go get -u github.com/linnv/manhelp/...
 cd $GOPATH/src/github.com/linnv/manhelp
 make
 ```
