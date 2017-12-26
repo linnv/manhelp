@@ -119,6 +119,17 @@ func InitManHelp() {
 	}
 	AddManHelper(hi)
 
+	hi.Alias = []string{"env"}
+	hi.FullName = []string{"goenv"}
+	hi.Description = "show go environment"
+	hi.ExecuteFunc = func() {
+		envs := os.Environ()
+		for _, v := range envs {
+			fmt.Printf("%+v\n", v)
+		}
+	}
+	AddManHelper(hi)
+
 	hi.Alias = []string{"bi"}
 	hi.FullName = []string{"buildinfo"}
 	hi.Description = "show building information"
