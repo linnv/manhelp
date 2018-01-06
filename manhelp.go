@@ -85,7 +85,7 @@ func AddManHelper(newHelpers ...ManHelper) error {
 	return nil
 }
 
-func InitManHelp() {
+func BasicManHelp() {
 	hi := HelpInfo{}
 	hi.Alias = []string{"t"}
 	hi.FullName = []string{"buildtime"}
@@ -143,7 +143,7 @@ func InitManHelp() {
 }
 
 func showManHelp() {
-	manhelp := string(`help man usage, ignore case:
+	manhelp := string(`man help usage, ignore case:
 1. xxItem
 2. help xxItem
 Item support list as following:

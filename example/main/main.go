@@ -9,7 +9,9 @@ import (
 
 func main() {
 	//basic help items associated the Makefile
-	manhelp.InitManHelp()
+	manhelp.BasicManHelp()
+
+	//add your manhelp items
 	hi := manhelp.HelpInfo{}
 	hi.Alias = []string{"abc"}
 	hi.FullName = []string{"abcbac"}
@@ -18,11 +20,11 @@ func main() {
 		os.Stdout.Write([]byte("abce:  \n"))
 	}
 	manhelp.AddManHelper(hi)
+
 	// For main() should run after adding all man helper
 	manhelp.Main()
 
 	//your code
-
 	abc := flag.String("abc", "justabc", "-abc=xxx")
 	println(*abc)
 }

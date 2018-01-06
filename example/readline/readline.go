@@ -26,7 +26,8 @@ var completer *readline.PrefixCompleter
 
 func main() {
 	//basic help items associated the Makefile
-	manhelp.InitManHelp()
+	manhelp.BasicManHelp()
+
 	pcs := make([]readline.PrefixCompleterInterface, 0, 2)
 	for _, m := range manhelp.ManHelpList {
 		for _, key := range m.Keys() {
