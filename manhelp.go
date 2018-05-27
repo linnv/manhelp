@@ -85,6 +85,11 @@ func AddManHelper(newHelpers ...ManHelper) error {
 	return nil
 }
 
+func BasicManHelpMain() {
+	BasicManHelp()
+	Main()
+}
+
 func BasicManHelp() {
 	hi := HelpInfo{}
 	hi.Alias = []string{"t"}
@@ -143,7 +148,7 @@ func BasicManHelp() {
 }
 
 func showManHelp() {
-	manhelp := string(`man help usage, ignore case:
+	manhelp := string(`man help usage, ignore case, no - prefix:
 1. xxItem
 2. help xxItem
 Item support list as following:
@@ -163,9 +168,13 @@ func Main() {
 		return
 	}
 
-	helptrim := strings.Trim(strings.TrimSpace(args[0]), "-")
+	helptrim := strings.TrimSpace(args[0])
 	lowerFirstArg := strings.ToLower(helptrim)
 	for i := 0; i < len(help); i++ {
+		//prevent from conflicting with flags
+		if lowerFirstArg[0] == '-' {
+			return
+		}
 		if lowerFirstArg == help[i] {
 			if len(args) == 1 {
 				showManHelp()
@@ -173,10 +182,6 @@ func Main() {
 			}
 			goto listHelp
 		}
-	}
-	//prevent from conflicting with flags
-	if lowerFirstArg[0] == '-' {
-		return
 	}
 listHelp:
 	ManHelpListLen := len(ManHelpList)
